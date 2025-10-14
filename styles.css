@@ -117,7 +117,7 @@ body {
     border: 6px solid var(--white);
     object-fit: cover;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-    animation: float 3s ease-in-out infinite;
+    animation: gentlePulse 4s ease-in-out infinite;
     margin: 0 auto;
     display: block;
 }
@@ -649,6 +649,17 @@ section {
     }
 }
 
+@keyframes gentlePulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+}
+
 @keyframes float {
     0%, 100% {
         transform: translateY(0);
@@ -656,6 +667,14 @@ section {
     50% {
         transform: translateY(-20px);
     }
+}
+
+/* Hover effects for profile image */
+.profile-image:hover {
+    animation-play-state: paused;
+    transform: scale(1.1);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
 }
 
 /* Responsive Design */
