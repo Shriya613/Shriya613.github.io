@@ -416,10 +416,18 @@ section {
 
 .projects-carousel {
     display: flex;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     scroll-behavior: smooth;
     gap: 2rem;
     flex: 1;
+    padding: 1rem 0;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.projects-carousel::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 
 .carousel-btn {
@@ -482,6 +490,8 @@ section {
     border-radius: 10px;
     box-shadow: var(--shadow);
     transition: var(--transition);
+    flex: 0 0 350px; /* Fixed width for horizontal scroll */
+    min-width: 350px;
 }
 
 .project-card:hover {
@@ -861,6 +871,11 @@ section {
     .carousel-btn {
         position: static;
         margin: 0 auto;
+    }
+    
+    .project-card {
+        flex: 0 0 300px;
+        min-width: 300px;
     }
 
     .education-item {

@@ -213,10 +213,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Start typing effect after a short delay
     setTimeout(typeEffect, 1000);
-
     // Add hover effect to project cards
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach(card => {
+    const projectCardsHover = document.querySelectorAll('.project-card');
+    projectCardsHover.forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px) scale(1.02)';
         });
@@ -226,87 +225,63 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Projects Carousel
+    // Projects Carousel - Horizontal Scrollable
     const carousel = document.getElementById('projectsCarousel');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    const indicatorsContainer = document.getElementById('carouselIndicators');
     const projectCards = document.querySelectorAll('.project-card');
     
-    let currentIndex = 0;
-    const cardsPerView = window.innerWidth <= 768 ? 1 : 2;
+    let isScrolling = false;
     
-    // Create indicators
-    function createIndicators() {
-        const totalSlides = Math.ceil(projectCards.length / cardsPerView);
-        indicatorsContainer.innerHTML = '';
+    function scrollCarousel(direction) {
+        if (isScrolling) return;
+        isScrolling = true;
         
-        for (let i = 0; i < totalSlides; i++) {
-            const indicator = document.createElement('div');
-            indicator.className = 'carousel-indicator';
-            if (i === 0) indicator.classList.add('active');
-            indicator.addEventListener('click', () => goToSlide(i));
-            indicatorsContainer.appendChild(indicator);
-        }
-    }
-    
-    function updateCarousel() {
-        const translateX = -currentIndex * (100 / cardsPerView);
-        carousel.style.transform = `translateX(${translateX}%)`;
+        const cardWidth = 350 + 32; // card width + gap
+        const scrollAmount = cardWidth;
         
-        // Update indicators
-        const indicators = document.querySelectorAll('.carousel-indicator');
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === currentIndex);
-        });
-        
-        // Update button states
-        const totalSlides = Math.ceil(projectCards.length / cardsPerView);
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex === totalSlides - 1;
-    }
-    
-    function goToSlide(index) {
-        currentIndex = index;
-        updateCarousel();
-    }
-    
-    function nextSlide() {
-        const totalSlides = Math.ceil(projectCards.length / cardsPerView);
-        if (currentIndex < totalSlides - 1) {
-            currentIndex++;
+        if (direction === 'left') {
+            carousel.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
         } else {
-            currentIndex = 0; // Loop back to start
+            carousel.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
         }
-        updateCarousel();
+        
+        // Reset scrolling flag after animation
+        setTimeout(() => {
+            isScrolling = false;
+        }, 500);
     }
     
-    function prevSlide() {
-        const totalSlides = Math.ceil(projectCards.length / cardsPerView);
-        if (currentIndex > 0) {
-            currentIndex--;
-        } else {
-            currentIndex = totalSlides - 1; // Loop to end
-        }
-        updateCarousel();
+    function updateButtonStates() {
+        const scrollLeft = carousel.scrollLeft;
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+        
+        prevBtn.disabled = scrollLeft <= 0;
+        nextBtn.disabled = scrollLeft >= maxScroll - 10; // Small tolerance
     }
     
     // Event listeners
-    nextBtn.addEventListener('click', nextSlide);
-    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', () => scrollCarousel('right'));
+    prevBtn.addEventListener('click', () => scrollCarousel('left'));
     
-    // Auto-play carousel
-    setInterval(nextSlide, 5000);
-    
-    // Initialize carousel
-    createIndicators();
-    updateCarousel();
-    
-    // Handle window resize
-    window.addEventListener('resize', () => {
-        createIndicators();
-        updateCarousel();
+    // Trackpad/mouse wheel support
+    carousel.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? 1 : -1;
+        carousel.scrollLeft += delta * 50; // Adjust scroll speed
     });
+    
+    // Update button states on scroll
+    carousel.addEventListener('scroll', updateButtonStates);
+    
+    // Initialize button states
+    updateButtonStates();
 
     // Console message
     console.log('%c👋 Welcome to my portfolio!', 'color: #4a90e2; font-size: 20px; font-weight: bold;');
