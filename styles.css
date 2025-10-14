@@ -113,11 +113,10 @@ body {
 .profile-image {
     width: 280px;
     height: 280px;
-    border-radius: 50%;
+    border-radius: 10px;
     border: 6px solid var(--white);
     object-fit: cover;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-    animation: gentlePulse 4s ease-in-out infinite;
     margin: 0 auto;
     display: block;
 }
@@ -683,13 +682,7 @@ section {
     }
 }
 
-/* Hover effects for profile image */
-.profile-image:hover {
-    animation-play-state: paused;
-    transform: scale(1.1);
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
-}
+/* Profile image is now static - no hover effects */
 
 /* Responsive Design */
 @media (max-width: 768px) {
