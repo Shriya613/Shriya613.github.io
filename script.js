@@ -226,6 +226,88 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Projects Carousel
+    const carousel = document.getElementById('projectsCarousel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const indicatorsContainer = document.getElementById('carouselIndicators');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    let currentIndex = 0;
+    const cardsPerView = window.innerWidth <= 768 ? 1 : 2;
+    
+    // Create indicators
+    function createIndicators() {
+        const totalSlides = Math.ceil(projectCards.length / cardsPerView);
+        indicatorsContainer.innerHTML = '';
+        
+        for (let i = 0; i < totalSlides; i++) {
+            const indicator = document.createElement('div');
+            indicator.className = 'carousel-indicator';
+            if (i === 0) indicator.classList.add('active');
+            indicator.addEventListener('click', () => goToSlide(i));
+            indicatorsContainer.appendChild(indicator);
+        }
+    }
+    
+    function updateCarousel() {
+        const translateX = -currentIndex * (100 / cardsPerView);
+        carousel.style.transform = `translateX(${translateX}%)`;
+        
+        // Update indicators
+        const indicators = document.querySelectorAll('.carousel-indicator');
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentIndex);
+        });
+        
+        // Update button states
+        const totalSlides = Math.ceil(projectCards.length / cardsPerView);
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === totalSlides - 1;
+    }
+    
+    function goToSlide(index) {
+        currentIndex = index;
+        updateCarousel();
+    }
+    
+    function nextSlide() {
+        const totalSlides = Math.ceil(projectCards.length / cardsPerView);
+        if (currentIndex < totalSlides - 1) {
+            currentIndex++;
+        } else {
+            currentIndex = 0; // Loop back to start
+        }
+        updateCarousel();
+    }
+    
+    function prevSlide() {
+        const totalSlides = Math.ceil(projectCards.length / cardsPerView);
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            currentIndex = totalSlides - 1; // Loop to end
+        }
+        updateCarousel();
+    }
+    
+    // Event listeners
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+    
+    // Auto-play carousel
+    setInterval(nextSlide, 5000);
+    
+    // Initialize carousel
+    createIndicators();
+    updateCarousel();
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        createIndicators();
+        updateCarousel();
+    });
+
     // Console message
     console.log('%c👋 Welcome to my portfolio!', 'color: #4a90e2; font-size: 20px; font-weight: bold;');
     console.log('%cInterested in the code? Check out the repository on GitHub!', 'color: #666; font-size: 14px;');
