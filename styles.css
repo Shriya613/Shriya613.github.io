@@ -103,17 +103,23 @@ body {
 }
 
 .profile-image-container {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-image {
-    width: 200px;
-    height: 200px;
+    width: 280px;
+    height: 280px;
     border-radius: 50%;
-    border: 5px solid var(--white);
+    border: 6px solid var(--white);
     object-fit: cover;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
     animation: float 3s ease-in-out infinite;
+    margin: 0 auto;
+    display: block;
 }
 
 .hero-title {
@@ -719,8 +725,8 @@ section {
 
 @media (max-width: 480px) {
     .profile-image {
-        width: 150px;
-        height: 150px;
+        width: 200px;
+        height: 200px;
     }
 
     .hero-title {
