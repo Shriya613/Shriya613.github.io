@@ -69,12 +69,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Get form values
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
+        const recipientEmail = document.getElementById('recipientEmail').value;
         const subject = document.getElementById('subject').value.trim();
         const message = document.getElementById('message').value.trim();
 
         // Basic validation
-        if (!name || !email || !subject || !message) {
-            showFormMessage('Please fill in all fields.', 'error');
+        if (!name || !email || !recipientEmail || !subject || !message) {
+            showFormMessage('Please fill in all fields and select a recipient email.', 'error');
             return;
         }
 
@@ -87,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // In a real application, you would send this data to a server
         // For now, we'll just show a success message
-        showFormMessage('Thank you for your message! I will get back to you soon.', 'success');
+        showFormMessage(`Thank you for your message! I will get back to you soon at ${recipientEmail}.`, 'success');
         
         // Reset form
         contactForm.reset();
