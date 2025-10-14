@@ -546,16 +546,17 @@ section {
 }
 
 .project-link {
-    display: inline-flex;
+    display: inline-flex !important;
     align-items: center;
     gap: 5px;
     padding: 8px 15px;
-    text-decoration: none;
+    text-decoration: none !important;
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
     border-radius: 20px;
     font-size: 0.9rem;
     transition: var(--transition);
+    background: transparent;
 }
 
 .project-link:hover {
