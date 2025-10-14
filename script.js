@@ -283,6 +283,64 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize button states
     updateButtonStates();
 
+    // Certifications Carousel - Horizontal Scrollable
+    const certCarousel = document.getElementById('certificationsCarousel');
+    const certPrevBtn = document.getElementById('certPrevBtn');
+    const certNextBtn = document.getElementById('certNextBtn');
+    const certCards = document.querySelectorAll('.certification-card');
+    
+    let isCertScrolling = false;
+    
+    function scrollCertCarousel(direction) {
+        if (isCertScrolling) return;
+        isCertScrolling = true;
+        
+        const cardWidth = 300 + 32; // card width + gap
+        const scrollAmount = cardWidth;
+        
+        if (direction === 'left') {
+            certCarousel.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        } else {
+            certCarousel.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Reset scrolling flag after animation
+        setTimeout(() => {
+            isCertScrolling = false;
+        }, 500);
+    }
+    
+    function updateCertButtonStates() {
+        const scrollLeft = certCarousel.scrollLeft;
+        const maxScroll = certCarousel.scrollWidth - certCarousel.clientWidth;
+        
+        certPrevBtn.disabled = scrollLeft <= 0;
+        certNextBtn.disabled = scrollLeft >= maxScroll - 10; // Small tolerance
+    }
+    
+    // Event listeners for certifications
+    certNextBtn.addEventListener('click', () => scrollCertCarousel('right'));
+    certPrevBtn.addEventListener('click', () => scrollCertCarousel('left'));
+    
+    // Trackpad/mouse wheel support for certifications
+    certCarousel.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? 1 : -1;
+        certCarousel.scrollLeft += delta * 50; // Adjust scroll speed
+    });
+    
+    // Update button states on scroll for certifications
+    certCarousel.addEventListener('scroll', updateCertButtonStates);
+    
+    // Initialize certification button states
+    updateCertButtonStates();
+
     // Console message
     console.log('%c👋 Welcome to my portfolio!', 'color: #4a90e2; font-size: 20px; font-weight: bold;');
     console.log('%cInterested in the code? Check out the repository on GitHub!', 'color: #666; font-size: 14px;');
