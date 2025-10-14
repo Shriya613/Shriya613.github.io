@@ -176,45 +176,43 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize
     highlightNavigation();
 
-    // Typing effect for hero subtitle (optional enhancement)
-    const subtitle = document.querySelector('.hero-subtitle');
-    const originalText = subtitle.textContent;
-    const words = originalText.split(' | ');
-    let wordIndex = 0;
+    // Typing effect for hero subtitle
+    const typingText = document.getElementById('typing-text');
+    const titles = ['AI Developer', 'Problem Solver', 'Tech Enthusiast'];
+    let titleIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
     let currentText = '';
 
     function typeEffect() {
-        const currentWord = words[wordIndex];
+        const currentTitle = titles[titleIndex];
         
         if (isDeleting) {
-            currentText = currentWord.substring(0, charIndex - 1);
+            currentText = currentTitle.substring(0, charIndex - 1);
             charIndex--;
         } else {
-            currentText = currentWord.substring(0, charIndex + 1);
+            currentText = currentTitle.substring(0, charIndex + 1);
             charIndex++;
         }
 
-        subtitle.textContent = currentText;
+        typingText.textContent = currentText;
 
         let typeSpeed = isDeleting ? 50 : 100;
 
-        if (!isDeleting && charIndex === currentWord.length) {
+        if (!isDeleting && charIndex === currentTitle.length) {
             typeSpeed = 2000; // Pause at end
             isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
-            wordIndex = (wordIndex + 1) % words.length;
-            typeSpeed = 500; // Pause before starting new word
+            titleIndex = (titleIndex + 1) % titles.length;
+            typeSpeed = 500; // Pause before starting new title
         }
 
-        // Uncomment the line below to enable typing effect
-        // setTimeout(typeEffect, typeSpeed);
+        setTimeout(typeEffect, typeSpeed);
     }
 
-    // Start typing effect (commented out by default)
-    // setTimeout(typeEffect, 1000);
+    // Start typing effect after a short delay
+    setTimeout(typeEffect, 1000);
 
     // Add hover effect to project cards
     const projectCards = document.querySelectorAll('.project-card');

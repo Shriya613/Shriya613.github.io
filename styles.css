@@ -136,6 +136,20 @@ body {
     font-size: 1.5rem;
     margin-bottom: 2rem;
     opacity: 0.9;
+    min-height: 1.5rem;
+}
+
+/* Typing cursor effect */
+#typing-text::after {
+    content: '|';
+    animation: blink 1s infinite;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
 }
 
 .social-links {
