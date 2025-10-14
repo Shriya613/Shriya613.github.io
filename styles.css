@@ -179,6 +179,18 @@ body {
     transform: translateY(-5px);
 }
 
+.leetcode-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* Makes the logo white */
+    transition: var(--transition);
+}
+
+.social-link:hover .leetcode-logo {
+    filter: brightness(0) invert(0.2); /* Makes the logo dark blue on hover */
+}
+
 /* Buttons */
 .btn {
     display: inline-block;
