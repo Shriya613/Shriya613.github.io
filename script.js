@@ -69,13 +69,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Get form values
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
-        const recipientEmail = document.getElementById('recipientEmail').value;
         const subject = document.getElementById('subject').value.trim();
         const message = document.getElementById('message').value.trim();
 
         // Basic validation
-        if (!name || !email || !recipientEmail || !subject || !message) {
-            showFormMessage('Please fill in all fields and select a recipient email.', 'error');
+        if (!name || !email || !subject || !message) {
+            showFormMessage('Please fill in all fields.', 'error');
             return;
         }
 
@@ -86,12 +85,27 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // In a real application, you would send this data to a server
-        // For now, we'll just show a success message
-        showFormMessage(`Thank you for your message! I will get back to you soon at ${recipientEmail}.`, 'success');
+        // Submit the form to Formspree
+        const formData = new FormData(contactForm);
         
-        // Reset form
-        contactForm.reset();
+        fetch(contactForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                showFormMessage('Thank you for your message! I will get back to you soon.', 'success');
+                contactForm.reset();
+            } else {
+                showFormMessage('There was a problem sending your message. Please try again.', 'error');
+            }
+        })
+        .catch(error => {
+            showFormMessage('There was a problem sending your message. Please try again.', 'error');
+        });
 
         // Hide message after 5 seconds
         setTimeout(() => {
