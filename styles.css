@@ -685,6 +685,32 @@ section {
     color: #666;
 }
 
+.certification-links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.certification-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.certification-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
 /* Resume Section */
 .resume {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
