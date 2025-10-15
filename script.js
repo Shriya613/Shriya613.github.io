@@ -190,7 +190,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize
     highlightNavigation();
 
-    // Typing effect for hero subtitle
+    // Typing effect for hero subtitle (COMMENTED OUT FOR LATER USE)
+    /*
     const typingText = document.getElementById('typing-text');
     const titles = ['AI Developer', 'Problem Solver', 'Tech Enthusiast'];
     let titleIndex = 0;
@@ -227,6 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Start typing effect after a short delay
     setTimeout(typeEffect, 1000);
+    */
     // Add hover effect to project cards
     const projectCardsHover = document.querySelectorAll('.project-card');
     projectCardsHover.forEach(card => {

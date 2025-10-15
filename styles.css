@@ -138,7 +138,8 @@ body {
     min-height: 1.5rem;
 }
 
-/* Typing cursor effect */
+/* Typing cursor effect (COMMENTED OUT FOR LATER USE) */
+/*
 #typing-text::after {
     content: '|';
     animation: blink 1s infinite;
@@ -150,6 +151,7 @@ body {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
 }
+*/
 
 .social-links {
     display: flex;
