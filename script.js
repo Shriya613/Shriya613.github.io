@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isCertScrolling) return;
         isCertScrolling = true;
         
-        const cardWidth = 300 + 32; // card width + gap
+        const cardWidth = 320 + 32; // card width + gap
         const scrollAmount = cardWidth;
         
         if (direction === 'left') {
