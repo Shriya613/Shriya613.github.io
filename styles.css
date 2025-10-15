@@ -638,17 +638,18 @@ section {
 
 .certification-card {
     background: var(--white);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 10px;
     box-shadow: var(--shadow);
     transition: var(--transition);
     text-align: center;
     flex: 0 0 300px; /* Fixed width for horizontal scroll */
     min-width: 300px;
-    height: 250px; /* Fixed height for consistency */
+    height: 280px; /* Fixed height for consistency */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .certification-link:hover .certification-card {
@@ -672,19 +673,35 @@ section {
 .certification-card h3 {
     color: var(--secondary-color);
     margin-bottom: 0.5rem;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    height: 2.6rem; /* Fixed height for title area */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .issuer {
     color: var(--primary-color);
     font-weight: 600;
     margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+    height: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .date {
     color: #666;
     font-size: 0.9rem;
     margin-bottom: 1rem;
+    height: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .description {
@@ -1041,7 +1058,13 @@ section {
     .certification-card {
         flex: 0 0 280px;
         min-width: 280px;
-        height: 220px; /* Slightly smaller height on mobile */
+        height: 250px; /* Consistent height on mobile */
+        padding: 1.2rem;
+    }
+    
+    .certification-card h3 {
+        font-size: 1.1rem;
+        height: 2.4rem;
     }
     
     .certification-link {

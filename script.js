@@ -314,12 +314,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (direction === 'left') {
             certCarousel.scrollBy({
-                left: scrollAmount,
+                left: -scrollAmount,
                 behavior: 'smooth'
             });
         } else {
             certCarousel.scrollBy({
-                left: -scrollAmount,
+                left: scrollAmount,
                 behavior: 'smooth'
             });
         }
