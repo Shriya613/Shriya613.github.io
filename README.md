@@ -2,6 +2,7 @@
 
 A personal portfolio website showcasing projects, skills, and experience.
 To see my portfolio launch this website: https://shriya613.github.io/
+Check it out!
 ## 📁 Repository Structure
 
 ```
